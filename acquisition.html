@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js – The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-auto-animate>
+				<h2 data-id="code-title">Final Pass</h2>
+				<pre data-id="code-animation"><code class="sql" data-trim data-line-numbers="|2-4|25-27|93|105-108|129-131|220">
+					select distinct
+					style_code
+					,(convert(int,merch_year)*100)+merch_week as fiscalyearperiod
+					,locationcode
+					,0 as permanentmdretail
+					,0 as permanentmuretail
+					,0 as permanentmdcretail
+					,0 as permanentmucretail
+					,0 as promopctotalretail
+					,0 as receivedunits
+					,0 as receivedretail
+					,0 as receivedcost
+					,0 as returntovendorunits
+					,0 as returntovendorretail
+					,0 as returntovendorcost
+					,0 as distributionsunits
+					,0 as distributionsretail
+					,0 as distributionscost
+					,0 as transferinunits
+					,0 as transferinretail
+					,0 as transferincost
+					,0 as transferoutunits
+					,0 as transferoutretail
+					,0 as transferoutcost
+					,sum(quantity_sold) as salestotalunits
+					,sum(salestotalretail) as salestotalretail
+					,sum(ext_cost) as salestotalcost
+					,0 as returnunits
+					,0 as returnretail
+					,0 as returncost
+					,0 as shrinkactualunits
+					,0 as shrinkactualretail
+					,0 as shrinkactualcost
+					,0 as shrinkprovisionunits
+					,0 as shrinkprovisionretail
+					,0 as shrinkprovisioncost
+					,0 as adjustmentstotalunits
+					,0 as adjustmentstotalretail
+					,0 as adjustmentstotalcost
+					,0 as costfactorstotalcost
+					,0 as discountstotalcost
+					,0 as permanentmdsellingretail
+					,0 as permanentmusellingretail
+					,0 as permanentmdcsellingretail
+					,0 as permanentmucsellingretail
+					,0 as promopctotalsellingretail
+					,0 as salestotalsellingretail
+					,0 as returnsellingretail
+					,0 as exchangeratedifferenceretail
+					,0 as permanentmdretailtaxexclusive
+					,0 as permanentmuretailtaxexclusive
+					,0 as permanentmdcretailtaxexclusive
+					,0 as permanentmucretailtaxexclusive
+					,0 as promopctotalretailtaxexclusive
+					,0 as receivedretailtaxexclusive
+					,0 as returntovendorretailtaxexclusive
+					,0 as distributionsretailtaxexclusive
+					,0 as transferinretailtaxexclusive
+					,0 as transferoutretailtaxexclusive
+					,0 as salestotalretailtaxexclusive
+					,0 as returnretailtaxexclusive
+					,0 as shrinkactualretailtaxexclusive
+					,0 as adjustementstotalretailtaxexclusive
+					,0 as salestotalsellingretailtaxexclusive
+					,0 as returnsellingretailtaxexclusive
+					,0 as permanentmdsellingretailtaxexclusive
+					,0 as permanentmusellingretailtaxexclusive
+					,0 as permanentmdcsellingretailtaxexclusive
+					,0 as permanentmucsellingretailtaxexclusive
+					,0 as promopctotalsellingretailtaxexclusive
+					,0 as inventoryreductionscost
+					,0 as shrinktotalcost
+					,0 as markdownpermanentcost
+					,0 as markdownpromocost
+					,0 as rimadditionscost
+					,0 as distributionsnetretail
+					,0 as purchasenetretail
+					,0 as transfernetretail
+					,0 as markupsretail
+					,0 as receivedsellingretail
+					,0 as receivedsellingretailtaxexclusive
+					,0 as receivedlocalcost
+					,0 as returntovendorsellingretail
+					,0 as returntovendorsellingretailtaxexclusive
+					,0 as returntovendorlocalcost
+					,0 as distributionssellingretail
+					,0 as distributionssellingretailtaxexclusive
+					,0 as distributionslocalcost
+					,0 as transferinsellingretail
+					,0 as transferinsellingretailtaxexclusive
+					,0 as transferinlocalcost
+					,0 as transferoutsellingretail
+					from #LLL
+					left join calendar_date cd
+					on #LLL.transaction_date = cd.calendar_date
+					group by style_code,(convert(int,merch_year)*100)+merch_week,locationcode
+					order by (convert(int,merch_year)*100)+merch_week,style_code
+
+
+
+
+
+
+					select distinct
+					hierarchy_group_code as Merchandise_group_code
+					,(convert(int,merch_year)*100)+merch_week as fiscalyearweek
+					,(convert(int,merch_year)*100)+merch_period as fiscalyearperiod
+					,locationcode
+					,0 as permanentmdretail
+					,0 as permanentmuretail
+					,0 as permanentmdcretail
+					,0 as permanentmucretail
+					,0 as promopctotalretail
+					,0 as receivedunits
+					,0 as receivedretail
+					,0 as receivedcost
+					,0 as returntovendorunits
+					,0 as returntovendorretail
+					,0 as returntovendorcost
+					,0 as distributionsunits
+					,0 as distributionsretail
+					,0 as distributionscost
+					,0 as transferinunits
+					,0 as transferinretail
+					,0 as transferincost
+					,0 as transferoutunits
+					,0 as transferoutretail
+					,0 as transferoutcost
+					,sum(quantity_sold) as salestotalunits
+					,sum(salestotalretail) as salestotalretail
+					,sum(ext_cost) as salestotalcost
+					,0 as returnunits
+					,0 as returnretail
+					,0 as returncost
+					,0 as shrinkactualunits
+					,0 as shrinkactualretail
+					,0 as shrinkactualcost
+					,0 as shrinkprovisionunits
+					,0 as shrinkprovisionretail
+					,0 as shrinkprovisioncost
+					,0 as adjustmentstotalunits
+					,0 as adjustmentstotalretail
+					,0 as adjustmentstotalcost
+					,0 as costfactorstotalcost
+					,0 as discountstotalcost
+					,0 as permanentmdsellingretail
+					,0 as permanentmusellingretail
+					,0 as permanentmdcsellingretail
+					,0 as permanentmucsellingretail
+					,0 as promopctotalsellingretail
+					,0 as salestotalsellingretail
+					,0 as returnsellingretail
+					,0 as exchangeratedifferenceretail
+					,0 as permanentmdretailtaxexclusive
+					,0 as permanentmuretailtaxexclusive
+					,0 as permanentmdcretailtaxexclusive
+					,0 as permanentmucretailtaxexclusive
+					,0 as promopctotalretailtaxexclusive
+					,0 as receivedretailtaxexclusive
+					,0 as returntovendorretailtaxexclusive
+					,0 as distributionsretailtaxexclusive
+					,0 as transferinretailtaxexclusive
+					,0 as transferoutretailtaxexclusive
+					,0 as salestotalretailtaxexclusive
+					,0 as returnretailtaxexclusive
+					,0 as shrinkactualretailtaxexclusive
+					,0 as adjustementstotalretailtaxexclusive
+					,0 as salestotalsellingretailtaxexclusive
+					,0 as returnsellingretailtaxexclusive
+					,0 as permanentmdsellingretailtaxexclusive
+					,0 as permanentmusellingretailtaxexclusive
+					,0 as permanentmdcsellingretailtaxexclusive
+					,0 as permanentmucsellingretailtaxexclusive
+					,0 as promopctotalsellingretailtaxexclusive
+					,0 as inventoryreductionscost
+					,0 as shrinktotalcost
+					,0 as markdownpermanentcost
+					,0 as markdownpromocost
+					,0 as rimadditionscost
+					,0 as distributionsnetretail
+					,0 as purchasenetretail
+					,0 as transfernetretail
+					,0 as markupsretail
+					,0 as receivedsellingretail
+					,0 as receivedsellingretailtaxexclusive
+					,0 as receivedlocalcost
+					,0 as returntovendorsellingretail
+					,0 as returntovendorsellingretailtaxexclusive
+					,0 as returntovendorlocalcost
+					,0 as distributionssellingretail
+					,0 as distributionssellingretailtaxexclusive
+					,0 as distributionslocalcost
+					,0 as transferinsellingretail
+					,0 as transferinsellingretailtaxexclusive
+					,0 as transferinlocalcost
+					,0 as transferoutsellingretail
+					,0 as transferoutsellingretailtaxexclusive
+					,0 as transferoutlocalcost
+					,0 as salestotallocalcost
+					,0 as returnlocalcost
+					,0 as shrinkactualsellingretail
+					,0 as shrinkactualsellingretailtaxexclusive
+					,0 as shrinkactuallocalcost
+					,0 as shrinkprovisionsellingretail
+					,0 as shrinkprovisionlocalcost
+					,0 as adjustmentstotalsellingretail
+					,0 as adjustmentstotalsellingretailtaxexclusive
+					,0 as adjustementstotallocalcost
+					,0 as costfactorstotallocalcost
+					,0 as discountstotallocalcost
+					,0 as inventoryreductionslocalcost
+					,0 as shrinktotallocalcost
+					,0 as markdownpermanentlocalcost
+					,0 as markdownpromolocalcost
+					,0 as rimadditionslocalcost
+					,0 as distributionnetsellingretail
+					,0 as purchasenetsellingretail
+					,0 as transfernetsellingretail
+					,0 as markupssellingretail
+					from #LLL
+					left join calendar_date cd
+					on #LLL.transaction_date = cd.calendar_date
+					left join style st
+					on #lll.style_code = st.style_code
+					left join style_group sp
+					on st.style_id = sp.style_id
+					left join hierarchy_group hg
+					on hg.hierarchy_group_id = sp.hierarchy_group_id
+					and hg. hierarchy_level_id = 10000005
+					group by hierarchy_group_code,(convert(int,merch_year)*100)+merch_week,locationcode
+					order by (convert(int,merch_year)*100)+merch_week,hierarchy_group_code
+				</code></pre>
+			</section>
+				</section>
+
+					<section data-auto-animate>
+					<h2 data-id="code-title">First Pass</h2>
+					<pre data-id="code-animation"><code class="sql" data-trim data-line-numbers>
+						select
+						transactionDate
+						,transactionUnits
+						,transactionRetail
+						,transactionCost
+						,locationID
+						,StyleCode
+						,UPCno
+						from CanadaDB CDB
+					</code></pre>
+					<table style="font-size:16px">
+					 <tr>
+						 <th>transactionDate</th>
+						 <th>transactionUnits</th>
+						 <th>transactionRetail</th>
+						 <th>transactionCost</th>
+						 <th>locationID</th>
+						 <th>StyleCode</th>
+						 <th>UPCno</th>
+					 </tr>
+					 <tr>
+						 <td>2021-01-01</td>
+						 <td>1</td>
+						 <td>10.00</td>
+						 <td>5.00</td>
+						 <td>001</td>
+						 <td>ABCD</td>
+						 <td>895836104944</td>
+					 </tr>
+					 <tr>
+						 <td>2021-01-01</td>
+						 <td>1</td>
+						 <td>10.00</td>
+						 <td>5.00</td>
+						 <td>001</td>
+						 <td>ABCD</td>
+						 <td>956836104589</td>
+					 </tr>
+					 <tr>
+						 <td>2021-01-01</td>
+						 <td>1</td>
+						 <td>109.00</td>
+						 <td>58.00</td>
+						 <td>002</td>
+						 <td>LMNO</td>
+						 <td>400036104944</td>
+					 </tr>
+					 <tr>
+						 <td>2021-01-01</td>
+						 <td>1</td>
+						 <td>140.00</td>
+						 <td>95.00</td>
+						 <td>002</td>
+						 <td>ELMO</td>
+						 <td>895836104944</td>
+					 </tr>
+					 <tr>
+						 <td>2021-01-01</td>
+						 <td>1</td>
+						 <td>140.00</td>
+						 <td>95.00</td>
+						 <td>001</td>
+						 <td>ELMO</td>
+						 <td>895836104944</td>
+					 </tr>
+					 </tr>
+					</table>
+				</section>
+
+
+
+				<section data-auto-animate>
+				<h2 data-id="code-title">N Pass - Join Merch</h2>
+				<pre data-id="code-animation"><code class="sql" data-trim data-line-numbers="|8-9,12-13|10,14-17">
+					select
+					transactionDate
+					,transactionUnits
+					,transactionRetail
+					,transactionCost
+					,locationID
+					,StyleCode
+					,UPCno
+					,upc.upcnumber
+					,st.style_code
+					from CanadaDB CDB
+					left join upc
+					on cdb.upcno = upc.upcnumber
+					left join sku
+					on upc.sku_id = sku.sku_id
+					left join style st
+					on sku.style_id = st.style_id
+				</code></pre>
+				<table style="font-size:16px">
+				 <tr>
+					 <th>transactionDate</th>
+<th>transactionUnits</th>
+					 <th>transactionRetail</th>
+					 <th>transactionCost</th>
+					 <th>locationID</th>
+					 <th>StyleCode</th>
+					 <th>UPCno</th>
+					 <th>upcnumber</th>
+					 <th>style_code</th>
+				 </tr>
+				 <tr>
+					 <td>2021-01-01</td>
+					 <td>1</td>
+					 <td>10.00</td>
+					 <td>5.00</td>
+					 <td>001</td>
+					 <td>ABCD</td>
+					 <td>895836104944</td>
+					 <td>895836104944</td>
+					 <td>ABCD</td>
+				 </tr>
+				 <tr>
+					 <td>2021-01-01</td>
+					 <td>1</td>
+					 <td>10.00</td>
+					 <td>5.00</td>
+					 <td>001</td>
+					 <td>ABCD</td>
+					 <td>956836104589</td>
+					 <td>NULL</td>
+					 <td>NULL</td>
+				 </tr>
+				 <tr>
+					 <td>2021-01-01</td>
+					 <td>1</td>
+					 <td>109.00</td>
+					 <td>58.00</td>
+					 <td>002</td>
+					 <td>LMNO</td>
+					 <td>400036104944</td>
+					 <td>400036104944</td>
+					 <td>PQRS</td>
+				 </tr>
+				 <tr>
+					 <td>2021-01-01</td>
+					 <td>1</td>
+					 <td>140.00</td>
+					 <td>95.00</td>
+					 <td>002</td>
+					 <td>ELMO</td>
+					 <td>895836104944</td>
+					 <td>NULL</td>
+					 <td>NULL</td>
+				 </tr>
+				 <tr>
+					 <td>2021-01-01</td>
+					 <td>1</td>
+					 <td>140.00</td>
+					 <td>95.00</td>
+					 <td>001</td>
+					 <td>ELMO</td>
+					 <td>895836104944</td>
+					 <td>NULL</td>
+					 <td>NULL</td>
+				 </tr>
+				 </tr>
+				</table>
+			</section>
+
+			<section data-auto-animate>
+			<h2 data-id="code-title">N Pass - Fix 4000</h2>
+			<pre data-id="code-animation"><code class="sql" data-trim data-line-numbers="9-10,18-19|">
+				select
+				transactionDate
+				,transactionUnits
+				,transactionRetail
+				,transactionCost
+				,locationID
+				,StyleCode
+				,UPCno
+				,coalesce(UFL.fixedUPC,upc.upcnumber) as upcnumber
+				,coalesce(UFL.fixedStyle_code,st.style_code) as style_code
+				from CanadaDB CDB
+				left join upc
+				on cdb.upcno = upc.upcnumber
+				left join sku
+				on upc.sku_id = sku.sku_id
+				left join style st
+				on sku.style_id = st.style_id
+				left join #UPCFixList UFL
+				on CDB.UPCno = UFL.UPCno
+			</code></pre>
+			<table style="font-size:16px">
+			 <tr>
+				 <th>transactionDate</th>
+<th>transactionUnits</th>
+				 <th>transactionRetail</th>
+				 <th>transactionCost</th>
+				 <th>locationID</th>
+				 <th>StyleCode</th>
+				 <th>UPCno</th>
+				 <th>upcnumber</th>
+				 <th>style_code</th>
+			 </tr>
+			 <tr>
+				 <td>2021-01-01</td>
+				 <td>1</td>
+				 <td>10.00</td>
+				 <td>5.00</td>
+				 <td>001</td>
+				 <td>ABCD</td>
+				 <td>895836104944</td>
+				 <td>895836104944</td>
+				 <td>ABCD</td>
+			 </tr>
+			 <tr>
+				 <td>2021-01-01</td>
+				 <td>1</td>
+				 <td>10.00</td>
+				 <td>5.00</td>
+				 <td>001</td>
+				 <td>ABCD</td>
+				 <td>956836104589</td>
+				 <td>NULL</td>
+				 <td>NULL</td>
+			 </tr>
+			 <tr>
+				 <td>2021-01-01</td>
+				 <td>1</td>
+				 <td>109.00</td>
+				 <td>58.00</td>
+				 <td>002</td>
+				 <td>LMNO</td>
+				 <td>400036104944</td>
+				 <td>745836252145</td>
+				 <td>LMNO</td>
+			 </tr>
+			 <tr>
+				 <td>2021-01-01</td>
+				 <td>1</td>
+				 <td>140.00</td>
+				 <td>95.00</td>
+				 <td>002</td>
+				 <td>ELMO</td>
+				 <td>895836104944</td>
+				 <td>NULL</td>
+				 <td>NULL</td>
+			 </tr>
+			 <tr>
+				 <td>2021-01-01</td>
+				 <td>1</td>
+				 <td>140.00</td>
+				 <td>95.00</td>
+				 <td>001</td>
+				 <td>ELMO</td>
+				 <td>895836104944</td>
+				 <td>NULL</td>
+				 <td>NULL</td>
+			 </tr>
+			 </tr>
+			</table>
+			</section>
+
+						<section data-auto-animate>
+						<h2 data-id="code-title">N Pass - Matching Style</h2>
+						<pre data-id="code-animation"><code class="sql" data-trim data-line-numbers>
+							select
+							transactionDate
+							,transactionUnits
+							,transactionRetail
+							,transactionCost
+							,locationID
+							,StyleCode
+							,UPCno
+							,coalesce(UFL.fixedUPC,upc.upcnumber) as upcnumber
+							,coalesce(UFL.fixedStyle_code,st.style_code) as style_code
+							from CanadaDB CDB
+							left join upc
+							on cdb.upcno = upc.upcnumber
+							left join sku
+							on upc.sku_id = sku.sku_id
+							left join style st
+							on sku.style_id = st.style_id
+							left join #UPCFixList UFL
+							on CDB.UPCno = UFL.UPCno
+						</code></pre>
+						<table style="font-size:16px">
+						 <tr>
+							 <th>transactionDate</th>
+<th>transactionUnits</th>
+							 <th>transactionRetail</th>
+							 <th>transactionCost</th>
+							 <th>locationID</th>
+							 <th>StyleCode</th>
+							 <th>UPCno</th>
+							 <th>upcnumber</th>
+							 <th>style_code</th>
+						 </tr>
+						 <tr>
+							 <td>2021-01-01</td>
+							 <td>1</td>
+							 <td>10.00</td>
+							 <td>5.00</td>
+							 <td>001</td>
+							 <td>ABCD</td>
+							 <td>895836104944</td>
+							 <td>895836104944</td>
+							 <td>ABCD</td>
+						 </tr>
+						 <tr>
+							 <td>2021-01-01</td>
+							 <td>1</td>
+							 <td>10.00</td>
+							 <td>5.00</td>
+							 <td>001</td>
+							 <td>ABCD</td>
+							 <td>956836104589</td>
+							 <td>NULL</td>
+							 <td>ABCD</td>
+						 </tr>
+						 <tr>
+							 <td>2021-01-01</td>
+							 <td>1</td>
+							 <td>109.00</td>
+							 <td>58.00</td>
+							 <td>002</td>
+							 <td>LMNO</td>
+							 <td>400036104944</td>
+							 <td>745836252145</td>
+							 <td>LMNO</td>
+						 </tr>
+						 <tr>
+							 <td>2021-01-01</td>
+							 <td>1</td>
+							 <td>140.00</td>
+							 <td>95.00</td>
+							 <td>002</td>
+							 <td>ELMO</td>
+							 <td>895836104944</td>
+							 <td>NULL</td>
+							 <td>NULL</td>
+						 </tr>
+						 <tr>
+							 <td>2021-01-01</td>
+							 <td>1</td>
+							 <td>140.00</td>
+							 <td>95.00</td>
+							 <td>001</td>
+							 <td>ELMO</td>
+							 <td>895836104944</td>
+							 <td>NULL</td>
+							 <td>NULL</td>
+						 </tr>
+						 </tr>
+						</table>
+						</section>
+
+									<section data-auto-animate>
+									<h2 data-id="code-title">N Pass - Add Missing UPCs</h2>
+									<pre data-id="code-animation"><code class="sql" data-trim data-line-numbers>
+										select
+										transactionDate
+										,transactionUnits
+										,transactionRetail
+										,transactionCost
+										,locationID
+										,StyleCode
+										,UPCno
+										,coalesce(UFL.fixedUPC,upc.upcnumber) as upcnumber
+										,coalesce(UFL.fixedStyle_code,st.style_code) as style_code
+										from CanadaDB CDB
+										left join upc
+										on cdb.upcno = upc.upcnumber
+										left join sku
+										on upc.sku_id = sku.sku_id
+										left join style st
+										on sku.style_id = st.style_id
+										left join #UPCFixList UFL
+										on CDB.UPCno = UFL.UPCno
+									</code></pre>
+									<table style="font-size:16px">
+									 <tr>
+										 <th>transactionDate</th>
+<th>transactionUnits</th>
+										 <th>transactionRetail</th>
+										 <th>transactionCost</th>
+										 <th>locationID</th>
+										 <th>StyleCode</th>
+										 <th>UPCno</th>
+										 <th>upcnumber</th>
+										 <th>style_code</th>
+									 </tr>
+									 <tr>
+										 <td>2021-01-01</td>
+										 <td>1</td>
+										 <td>10.00</td>
+										 <td>5.00</td>
+										 <td>001</td>
+										 <td>ABCD</td>
+										 <td>895836104944</td>
+										 <td>895836104944</td>
+										 <td>ABCD</td>
+									 </tr>
+									 <tr>
+										 <td>2021-01-01</td>
+										 <td>1</td>
+										 <td>10.00</td>
+										 <td>5.00</td>
+										 <td>001</td>
+										 <td>ABCD</td>
+										 <td>956836104589</td>
+										 <td>NULL</td>
+										 <td>ABCD</td>
+									 </tr>
+									 <tr>
+										 <td>2021-01-01</td>
+										 <td>1</td>
+										 <td>109.00</td>
+										 <td>58.00</td>
+										 <td>002</td>
+										 <td>LMNO</td>
+										 <td>400036104944</td>
+										 <td>745836252145</td>
+										 <td>LMNO</td>
+									 </tr>
+									 <tr>
+										 <td>2021-01-01</td>
+										 <td>1</td>
+										 <td>140.00</td>
+										 <td>95.00</td>
+										 <td>002</td>
+										 <td>ELMO</td>
+										 <td>895836104944</td>
+										 <td>895836104944</td>
+										 <td>ELMO</td>
+									 </tr>
+									 <tr>
+										 <td>2021-01-01</td>
+										 <td>1</td>
+										 <td>140.00</td>
+										 <td>95.00</td>
+										 <td>001</td>
+										 <td>ELMO</td>
+										 <td>895836104944</td>
+										 <td>895836104944</td>
+										 <td>ELMO</td>
+									 </tr>
+									 </tr>
+									</table>
+									</section>
+
+			</div>
+
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+		</script>
+
+	</body>
+</html>
