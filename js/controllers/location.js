@@ -3,12 +3,18 @@
  */
 export default class Location {
 
+	// The minimum number of milliseconds that must pass between
+	// calls to history.replaceState
+	MAX_REPLACE_STATE_FREQUENCY = 1000
+
 	constructor( Reveal ) {
 
 		this.Reveal = Reveal;
 
 		// Delays updates to the URL due to a Chrome thumbnailer bug
 		this.writeURLTimeout = 0;
+
+		this.replaceStateTimestamp = 0;
 
 		this.onWindowHashChange = this.onWindowHashChange.bind( this );
 
@@ -34,7 +40,7 @@ export default class Location {
 	 *
 	 * @returns slide indices or null
 	 */
-	getIndicesFromHash( hash=window.location.hash ) {
+	getIndicesFromHash( hash=window.location.hash, options={} ) {
 
 		// Attempt to parse the hash as either an index or name
 		let name = hash.replace( /^#\/?/, '' );
@@ -66,7 +72,7 @@ export default class Location {
 		}
 		else {
 			const config = this.Reveal.getConfig();
-			let hashIndexBase = config.hashOneBasedIndex ? 1 : 0;
+			let hashIndexBase = config.hashOneBasedIndex || options.oneBasedIndex ? 1 : 0;
 
 			// Read the index components of the hash
 			let h = ( parseInt( bits[0], 10 ) - hashIndexBase ) || 0,
@@ -142,10 +148,10 @@ export default class Location {
 			else if( config.hash ) {
 				// If the hash is empty, don't add it to the URL
 				if( hash === '/' ) {
-					window.history.replaceState( null, null, window.location.pathname + window.location.search );
+					this.debouncedReplaceState( window.location.pathname + window.location.search );
 				}
 				else {
-					window.history.replaceState( null, null, '#' + hash );
+					this.debouncedReplaceState( '#' + hash );
 				}
 			}
 			// UPDATE: The below nuking of all hash changes breaks
@@ -159,6 +165,26 @@ export default class Location {
 			// 	window.history.replaceState( null, null, window.location.pathname + window.location.search );
 			// }
 
+		}
+
+	}
+
+	replaceState( url ) {
+
+		window.history.replaceState( null, null, url );
+		this.replaceStateTimestamp = Date.now();
+
+	}
+
+	debouncedReplaceState( url ) {
+
+		clearTimeout( this.replaceStateTimeout );
+
+		if( Date.now() - this.replaceStateTimestamp > this.MAX_REPLACE_STATE_FREQUENCY ) {
+			this.replaceState( url );
+		}
+		else {
+			this.replaceStateTimeout = setTimeout( () => this.replaceState( url ), this.MAX_REPLACE_STATE_FREQUENCY );
 		}
 
 	}
